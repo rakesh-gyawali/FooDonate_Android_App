@@ -5,7 +5,10 @@
     <color name="colorWidget">#0C5C6E</color>
     <color name="colorButton">#18b6d9</color>
     <color name="colorPrimaryLight">#b3e5fc</color>
-    <color name="colorAccent">#00BCD4</color>
+    <color name="backGroundWhite">#FAFAFA</color>
+    <color name="colorAddress">#3EA923</color>
+
+
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>

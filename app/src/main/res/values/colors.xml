@@ -7,6 +7,8 @@
     <color name="colorPrimaryLight">#b3e5fc</color>
     <color name="backGroundWhite">#FAFAFA</color>
     <color name="colorAddress">#3EA923</color>
+    <color name="colorGreyBackground">#e5e5e5</color>
+
 
 
     <color name="primary_text">#212121</color>

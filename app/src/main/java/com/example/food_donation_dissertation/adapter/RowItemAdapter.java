@@ -64,7 +64,6 @@ public class RowItemAdapter extends RecyclerView.Adapter<RowItemAdapter.ViewHold
             itemImage = itemView.findViewById(R.id.item_image);
             tvName = itemView.findViewById(R.id.tvName);
             tvAddress = itemView.findViewById(R.id.tvAddress);
-
         }
     }
 }

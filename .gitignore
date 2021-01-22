@@ -14,3 +14,5 @@
 .cxx
 local.properties
 api_keys.properties
+app/src/main/res/values/secret_key.xml
+

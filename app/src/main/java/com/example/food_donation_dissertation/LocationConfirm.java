@@ -26,7 +26,6 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
-
     }
 
     @Override

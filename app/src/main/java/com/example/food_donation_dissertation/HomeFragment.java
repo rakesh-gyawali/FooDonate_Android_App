@@ -60,7 +60,6 @@ public class HomeFragment extends Fragment {
 
         makeRowItemList(view);
         makeRecentActivityList(view);
-
         return view;
     }
     //-----row item-----
@@ -132,7 +131,6 @@ public class HomeFragment extends Fragment {
         mActBanners.add(R.drawable.act4);
         mActAddresses.add("Jayabageswori, KTM");
         mActDates.add("Dec 10 2021");
-
         initActRecyclerView(view);
     }
 

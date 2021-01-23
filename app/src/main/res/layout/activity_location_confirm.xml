@@ -60,11 +60,11 @@
 
             <LinearLayout
                 android:id="@+id/imgLL"
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="16dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_below="@id/line"
@@ -72,7 +72,7 @@
                 >
                 <ImageView
                     android:id="@+id/imgHolder"
-                    android:layout_width="30dp"
+                    android:layout_width="20dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="16dp"
@@ -81,6 +81,7 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llMyLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:orientation="vertical"
@@ -92,7 +93,7 @@
                     android:id="@+id/tvMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MAP LOCATION (TAP TO CHANGE)"
+                    android:text="MY LOCATION (TAP TO CHANGE)"
                     android:layout_toRightOf="@id/imgHolder"
                     android:layout_below="@id/line"
                     android:textColor="@color/black" />
@@ -106,6 +107,19 @@
                     android:textSize="12dp"
                     android:textColor="@color/secondary_text" />
             </LinearLayout>
+            <ImageView
+                android:id="@+id/imgCheck"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:visibility="invisible"
+                android:src="@drawable/ic_correct"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_below="@+id/line"
+                android:layout_toRightOf="@id/llMyLocation"
+                />
+
             <Button
                 android:id="@+id/btnContinue"
                 android:layout_width="match_parent"

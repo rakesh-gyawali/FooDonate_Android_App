@@ -56,13 +56,19 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
 
     private void getAddressFromSharedPreference() {
         SharedPreferences savedData = getSharedPreferences("USER_LOCATION", Context.MODE_PRIVATE);
-        if (savedData.getString("address_line", "").isEmpty()) {
+        String addressLine =  savedData.getString("address_line", "");
+        if (addressLine.isEmpty()) {
             tvAddress.setText("Address has not been set ...");
             imgCheck.setVisibility(View.INVISIBLE);
+            return;
+        } else if (addressLine.length() > 35) {
+            //shorten addressLine to fit in card view ...
+            String addressLineInShort =  addressLine.substring(0, 30);
+            tvAddress.setText(addressLineInShort.concat(" ...."));
         } else {
-            tvAddress.setText(savedData.getString("address_line", ""));
-            imgCheck.setVisibility(View.VISIBLE);
-
+            tvAddress.setText(addressLine);
         }
+        //show check mark ...
+        imgCheck.setVisibility(View.VISIBLE);
     }
 }

@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            app:title="Donate food"
+            app:title="Donate"
             app:titleTextColor="@color/black"
             app:titleMarginTop="0dp"
             app:titleMarginBottom="0dp"
@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,80 +57,87 @@
                     />
 
             </LinearLayout>
-
+            <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llInst"
+            >
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/llInst"
+                android:layout_marginBottom="16dp"
+                app:singleLine="true"
                 >
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_1"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
                     app:chipStrokeColor="@color/colorGrey"
                     app:chipStrokeWidth="1dp"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Vegetable"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_2"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="false"
+                    app:checkedIconTint="@color/white"
                     android:text="Cooked Food"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_3"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Packed Food"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_5"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Fruit"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_6"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Grain/Bean/Rice"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_7"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Dairy"/>
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_8"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:chipBackgroundColor="@color/colorGrey"
                     android:textColor="@color/white"
-                    android:checked="true"
+                    app:checkedIconTint="@color/white"
                     android:text="Others"/>
 
-        </com.google.android.material.chip.ChipGroup>
+             </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tfEmail"
@@ -140,7 +146,7 @@
                 android:hint="Quantity in Kg *"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@drawable/ic_measure_1_"
-                android:layout_below="@+id/chipGroup"
+                android:layout_below="@+id/scrollView"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -166,33 +172,41 @@
                     android:layout_height="match_parent" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
+                android:id="@+id/llDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tfCharity"
                 android:gravity="center"
                 android:orientation="vertical" >
-                <TextView
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfDate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select expiry date, if any ..."
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="8dp"
-                    />
-                <Button
-                    android:id="@+id/btnDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:textAllCaps="false"
-                    android:background="@color/design_default_color_secondary"
-                    android:text="Select"
-                     />
+                    android:hint="Expiry date, if any"
+
+                    app:startIconDrawable="@drawable/ic_calendar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:longClickable="false"
+                        android:editable="false"
+                         />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:layout_below="@+id/llDate"
+                android:layout_marginTop="16dp" />
         </RelativeLayout>
-
-
 
     </androidx.core.widget.NestedScrollView>
 

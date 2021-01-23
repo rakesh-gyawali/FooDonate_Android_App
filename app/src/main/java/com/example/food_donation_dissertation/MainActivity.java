@@ -15,9 +15,11 @@ BottomNavigationView bottom_navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         bottom_navigation = findViewById(R.id.bottom_navigation);
         openFragment(new HomeFragment());
+
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -28,6 +30,10 @@ BottomNavigationView bottom_navigation;
                     case R.id.donate:
                         openFragment(new DonateFragment());
                         return true;
+                    case R.id.account:
+                        openFragment(new AccountFragment());
+                        return true;
+
                 }
                 return false;
             }

@@ -2,11 +2,16 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_home"
         android:title="Home"/>
     <item
         android:id="@+id/donate"
         android:enabled="true"
         android:icon="@drawable/ic_care"
         android:title="Donate"/>
+    <item
+        android:id="@+id/account"
+        android:enabled="true"
+        android:icon="@drawable/ic_user"
+        android:title="Account"/>
 </menu>

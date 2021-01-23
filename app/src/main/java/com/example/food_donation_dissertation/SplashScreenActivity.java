@@ -2,7 +2,9 @@ package com.example.food_donation_dissertation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private ImageView ivSplashLogo;
     private SpinKitView spin_kit;
+    static int TIMEOUT_MILLIS = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +25,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         ivSplashLogo = findViewById(R.id.ivSplashLogo);
         spin_kit = findViewById(R.id.spin_kit);
 
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, TIMEOUT_MILLIS);
+
         Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
-//        spin_kit.startAnimation(animFadeIn);
         ivSplashLogo.startAnimation(animFadeIn);
     }
 }

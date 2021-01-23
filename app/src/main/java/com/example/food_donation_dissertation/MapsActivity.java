@@ -7,7 +7,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +31,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -35,8 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SupportMapFragment supportMapFragment;
     private Double selectedLat;
     private Double selectedLong;
-    private Button btnSetLocation;
-
+    private  String addressLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +81,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                selectedLong = cameraPosition.target.longitude;
             }
         });
-
-        btnSetLocation = findViewById(R.id.btnSetLocation);
+        //when user press button ....
+        Button btnSetLocation = findViewById(R.id.btnSetLocation);
         btnSetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Shared preference ...
+                Geocoder selectedAddress = new Geocoder(getApplicationContext());
+                try {
+                    List<Address> addresses = selectedAddress.getFromLocation(selectedLat, selectedLong, 1);
+                    addressLine = addresses.get(0).getAddressLine(0);
+                    storeToSharedPreference();
+
+                    Intent intent = new Intent(getApplicationContext(), LocationConfirm.class);
+                    startActivity(intent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
+    }
 
-
-
+    private void storeToSharedPreference() {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("USER_LOCATION", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("address_line", addressLine);
+        editor.putString("lat", String.valueOf(selectedLat));
+        editor.putString("long", String.valueOf(selectedLong));
+        editor.apply();
     }
 
     public void setMyLocationLayerEnabled() {
@@ -94,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     1);
             mMap.setMyLocationEnabled(true);
         }
@@ -109,6 +133,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
             return;
         }
         Task<Location> task = client.getLastLocation();

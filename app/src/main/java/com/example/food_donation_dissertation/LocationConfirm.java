@@ -2,16 +2,20 @@ package com.example.food_donation_dissertation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LocationConfirm extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvMap, tvAddress;
+    private ImageView imgCheck;
     private Button btnContinue;
     private final String TAG = "LocationConfirm started";
     @Override
@@ -22,6 +26,9 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         tvMap = findViewById(R.id.tvMap);
         tvAddress = findViewById(R.id.tvAddress);
         btnContinue = findViewById(R.id.btnContinue);
+        imgCheck = findViewById(R.id.imgCheck);
+
+        getAddressFromSharedPreference();
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
@@ -44,6 +51,18 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
             case R.id.btnContinue:
                 Log.i(TAG, "btnContinue is pressed");
                 break;
+        }
+    }
+
+    private void getAddressFromSharedPreference() {
+        SharedPreferences savedData = getSharedPreferences("USER_LOCATION", Context.MODE_PRIVATE);
+        if (savedData.getString("address_line", "").isEmpty()) {
+            tvAddress.setText("Address has not been set ...");
+            imgCheck.setVisibility(View.INVISIBLE);
+        } else {
+            tvAddress.setText(savedData.getString("address_line", ""));
+            imgCheck.setVisibility(View.VISIBLE);
+
         }
     }
 }

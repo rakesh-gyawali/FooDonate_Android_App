@@ -13,6 +13,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
+
             app:title="FooDonate"
             app:titleTextColor="@color/colorPrimary"
             app:subtitle="Maharajgunj, Kathmandu >"

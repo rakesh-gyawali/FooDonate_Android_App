@@ -23,7 +23,7 @@
                    android:layout_centerHorizontal="true"
                 android:src="@drawable/charity_logo1"
                 app:civ_border_width="2dp"
-                app:civ_border_color="#FF000000"/>
+                app:civ_border_color="#757575"/>
 
             <TextView
                 android:id="@+id/tvName"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.food_donation_dissertation">
+    package="com.example.food_donation_dissertation" >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -17,8 +17,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Food_Donation_Dissertation">
-        <activity android:name=".SplashScreenActivity"></activity>
+        android:theme="@style/Theme.Food_Donation_Dissertation" >
+        <activity android:name=".CreateAccountActivity" >
+        </activity>
+        <activity android:name=".SplashScreenActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,7 +38,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".LocationConfirm" />
         <activity android:name=".Signup" />
-        <activity android:name=".Login">
+        <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

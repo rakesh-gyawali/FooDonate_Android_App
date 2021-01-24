@@ -30,10 +30,12 @@ BottomNavigationView bottom_navigation;
                     case R.id.donate:
                         openFragment(new DonateFragment());
                         return true;
+                    case R.id.logs:
+                        openFragment(new LogFragment());
+                        return true;
                     case R.id.account:
                         openFragment(new AccountFragment());
                         return true;
-
                 }
                 return false;
             }

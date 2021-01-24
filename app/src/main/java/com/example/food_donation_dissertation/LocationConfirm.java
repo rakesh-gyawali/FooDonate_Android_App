@@ -3,6 +3,7 @@ package com.example.food_donation_dissertation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,9 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LocationConfirm extends AppCompatActivity implements View.OnClickListener {
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-    private TextView tvMap, tvAddress;
+public class LocationConfirm extends AppCompatActivity implements View.OnClickListener{
+    private TextView tvMap, tvAddress, tvCancel;
     private ImageView imgCheck;
     private Button btnContinue;
     private final String TAG = "LocationConfirm started";
@@ -25,35 +27,46 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
 
         tvMap = findViewById(R.id.tvMap);
         tvAddress = findViewById(R.id.tvAddress);
-        btnContinue = findViewById(R.id.btnContinue);
+        btnContinue = findViewById(R.id.btnConfirm);
         imgCheck = findViewById(R.id.imgCheck);
+        tvCancel = findViewById(R.id.tvCancel);
 
         getAddressFromSharedPreference();
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
+        tvCancel.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
             case R.id.tvMap:
-                 intent = new Intent(getApplicationContext(), MapsActivity.class);
-                 startActivity(intent);
-                 break;
+                intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.tvAddress:
                 Log.i(TAG, "tvAddress is pressed");
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
-                 startActivity(intent);
-                 break;
-            case R.id.btnContinue:
-                Log.i(TAG, "btnContinue is pressed");
+                startActivity(intent);
+                break;
+            case R.id.btnConfirm:
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle("Success")
+                        .setMessage("Your request has been sent successfully. Check in Request Tab for more information.")
+                        .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                LocationConfirm.this.finish();
+                            }
+                        }).show();
+                break;
+            case R.id.tvCancel:
+                finish();
                 break;
         }
-    }
 
+    }
     private void getAddressFromSharedPreference() {
         SharedPreferences savedData = getSharedPreferences("USER_LOCATION", Context.MODE_PRIVATE);
         String addressLine =  savedData.getString("address_line", "");

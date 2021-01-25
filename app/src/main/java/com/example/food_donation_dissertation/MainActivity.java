@@ -34,7 +34,7 @@ BottomNavigationView bottom_navigation;
                         openFragment(new LogFragment());
                         return true;
                     case R.id.account:
-                        openFragment(new AccountFragment());
+                        openFragment(new LoginFragment());
                         return true;
                 }
                 return false;

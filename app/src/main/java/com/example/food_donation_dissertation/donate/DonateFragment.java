@@ -1,4 +1,4 @@
-    package com.example.food_donation_dissertation;
+    package com.example.food_donation_dissertation.donate;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.example.food_donation_dissertation.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

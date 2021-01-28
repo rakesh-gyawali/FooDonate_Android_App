@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.food_donation_dissertation.donate.MapsActivity;
+
 public class WelcomeLocation extends AppCompatActivity implements View.OnClickListener {
     private TextView tvMap, tvAddress, tvLater;
     private ImageView imgCheck;

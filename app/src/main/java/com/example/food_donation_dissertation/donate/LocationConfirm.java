@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.donate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.food_donation_dissertation.MainActivity;
+import com.example.food_donation_dissertation.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class LocationConfirm extends AppCompatActivity implements View.OnClickListener{
@@ -55,9 +57,11 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
                 new MaterialAlertDialogBuilder(this)
                         .setTitle("Success")
                         .setMessage("Your request has been sent successfully. Check in Request Tab for more information.")
-                        .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 LocationConfirm.this.finish();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                         }).show();
                 break;

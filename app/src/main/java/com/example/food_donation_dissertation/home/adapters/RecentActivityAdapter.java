@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation.adapter;
+package com.example.food_donation_dissertation.home.adapters;
 
 import android.content.Context;
 import android.util.Log;

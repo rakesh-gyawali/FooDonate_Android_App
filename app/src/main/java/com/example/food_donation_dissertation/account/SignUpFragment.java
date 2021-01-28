@@ -1,6 +1,5 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.account;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.food_donation_dissertation.R;
+import com.example.food_donation_dissertation.account.SelectProfilePictureFragment;
 
 public class SignUpFragment extends Fragment {
     Button btnNext;

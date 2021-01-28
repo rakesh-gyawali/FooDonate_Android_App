@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        tools:context=".MapsActivity" />
+        tools:context=".donate.MapsActivity" />
 
     <View
         android:id="@+id/view"

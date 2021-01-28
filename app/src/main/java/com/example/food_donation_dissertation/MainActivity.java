@@ -8,6 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.food_donation_dissertation.account.LoginFragment;
+import com.example.food_donation_dissertation.donate.DonateFragment;
+import com.example.food_donation_dissertation.home.HomeFragment;
+import com.example.food_donation_dissertation.log.LogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

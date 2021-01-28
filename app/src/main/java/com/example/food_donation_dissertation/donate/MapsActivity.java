@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.donate;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.food_donation_dissertation.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -87,7 +88,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     addressLine = addresses.get(0).getAddressLine(0);
                     storeToSharedPreference();
 
-                    Intent intent = new Intent(getApplicationContext(), WelcomeLocation.class);
+                    Intent intent = new Intent(getApplicationContext(), LocationConfirm.class);
+                    MapsActivity.this.finish();
                     startActivity(intent);
                 } catch (IOException e) {
                     e.printStackTrace();

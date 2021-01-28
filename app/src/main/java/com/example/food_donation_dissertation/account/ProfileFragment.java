@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.account;
 
 import android.os.Bundle;
 
@@ -8,13 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LogFragment extends Fragment {
+import com.example.food_donation_dissertation.R;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    public LogFragment() {
+public class ProfileFragment extends Fragment {
+
+
+    public ProfileFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,6 @@ public class LogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_log, container, false);
-        
-        return view;
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 }

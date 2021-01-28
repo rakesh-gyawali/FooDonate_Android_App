@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.account;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.food_donation_dissertation.R;
 
 
 public class LoginFragment extends Fragment {

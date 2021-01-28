@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DonateFragment">
+    tools:context=".donate.DonateFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.appbar.AppBarLayout
@@ -143,7 +143,7 @@
                 android:id="@+id/tfEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Quantity in Kg *"
+                android:hint="Total quantity in Kg *"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@drawable/ic_measure_1_"
                 android:layout_below="@+id/scrollView"

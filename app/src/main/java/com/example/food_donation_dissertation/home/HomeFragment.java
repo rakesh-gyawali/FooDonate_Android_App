@@ -1,4 +1,4 @@
-package com.example.food_donation_dissertation;
+package com.example.food_donation_dissertation.home;
 
 import android.os.Bundle;
 
@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.food_donation_dissertation.adapter.RecentActivityAdapter;
-import com.example.food_donation_dissertation.adapter.RowItemAdapter;
+import com.example.food_donation_dissertation.R;
+import com.example.food_donation_dissertation.home.adapters.RecentActivityAdapter;
+import com.example.food_donation_dissertation.home.adapters.RowItemAdapter;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {

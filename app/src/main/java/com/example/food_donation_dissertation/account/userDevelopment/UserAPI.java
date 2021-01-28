@@ -12,10 +12,10 @@ import retrofit2.http.PUT;
 
 public interface UserAPI {
     @FormUrlEncoded
-    @GET("api/users")
-    Call<UserResponse> checkRegister(@Field("phoneNo") String phoneNo, @Field("firstName") String firstName, @Field("lastName") String lastName, @Field("profilePicture") String profilePicture);
+    @GET("users")
+    Call<RegistrationResponse> checkRegister(@Field("phoneNo") String phoneNo, @Field("firstName") String firstName, @Field("lastName") String lastName, @Field("profilePicture") String profilePicture);
 
     @FormUrlEncoded
-    @PUT("api/users")
-    Call<UserResponse> checkLogin(@Field("phoneNo") String phoneNo, @Field("firstName") String firstName, @Field("lastName") String lastName, @Field("profilePicture") String profilePicture);
+    @PUT("users")
+    Call<LoginResponse> checkLogin(@Field("phoneNo") String phoneNo, @Field("password") String password);
 }

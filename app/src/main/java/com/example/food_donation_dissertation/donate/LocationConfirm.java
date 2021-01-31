@@ -60,8 +60,6 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
 
-
-
                                 LocationConfirm.this.finish();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

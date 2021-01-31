@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,13 +57,6 @@ public class ProfileFragment extends Fragment {
         toolbar = view.findViewById(R.id.topAppBar);
         imgProfile = view.findViewById(R.id.imgProfile);
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -70,6 +64,12 @@ public class ProfileFragment extends Fragment {
                     //To Erase Login Data ...
                     SharedPreferences savedData = view.getContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
                     savedData.edit().clear().commit();
+
+                    Fragment loginFragment = new LoginFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frameLayout, loginFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
                 return false;
             }
@@ -114,15 +114,5 @@ public class ProfileFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-//    public String getTokenFromSharedPreference() {
-//        SharedPreferences savedData =  getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-//        String token = savedData.getString("TOKEN", "");
-//        if (!token.isEmpty()) return token;
-//        else {
-//            Toast.makeText(getContext(), "TOKEN NOT FOUND IN SHARED PREFERENCE ...", Toast.LENGTH_SHORT).show();
-//            return token;
-//        }
-//    }
 
 }

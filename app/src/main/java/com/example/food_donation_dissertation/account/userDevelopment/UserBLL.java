@@ -25,11 +25,12 @@ public class UserBLL {
     public UserBLL() {
     }
 
-    public UserBLL(String firstName, String lastName, String phoneNo, String profilePicture) {
+    public UserBLL(String firstName, String lastName, String phoneNo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNo = phoneNo;
     }
+
     public boolean checkGetUser() {
         UserAPI api = URL.getInstance().create(UserAPI.class);
         String token = getTokenFromSharedPreference();
@@ -48,6 +49,7 @@ public class UserBLL {
         }
         return false;
     }
+
     public UserResponse returnUser() {
         return response.body();
     }

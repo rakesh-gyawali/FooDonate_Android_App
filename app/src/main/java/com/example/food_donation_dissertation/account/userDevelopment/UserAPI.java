@@ -7,13 +7,13 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface UserAPI {
-    @FormUrlEncoded
     @GET("users")
-    Call<RegistrationResponse> checkRegister(@Field("phoneNo") String phoneNo, @Field("firstName") String firstName, @Field("lastName") String lastName, @Field("profilePicture") String profilePicture);
+    Call<UserResponse> getUser(@Header("Authorization") String header);
 
     @FormUrlEncoded
     @PUT("users")

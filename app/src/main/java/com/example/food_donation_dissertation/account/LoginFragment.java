@@ -1,6 +1,7 @@
 package com.example.food_donation_dissertation.account;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,8 +19,9 @@ import android.widget.Toast;
 import com.example.food_donation_dissertation.MainActivity;
 import com.example.food_donation_dissertation.R;
 import com.example.food_donation_dissertation.URL;
-import com.example.food_donation_dissertation.account.userRegistrationDevelopment.UserRegistrationAPI;
 import com.example.food_donation_dissertation.account.userRegistrationDevelopment.UserRegistrationBLL;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -30,6 +32,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private String phoneNo;
     private String password;
+    private String firstname;
+    private String lastname;
     final private String TAG = "LoginFragment";
     public LoginFragment() {
         // Required empty public constructor
@@ -78,25 +82,40 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loginCall(){
-        if (!validateLogin()) return;
+        if (!validateInputs()) return;
         URL.getStrictMode();
 
         UserRegistrationBLL bll = new UserRegistrationBLL(edtPhone.getText().toString(), edtPassword.getText().toString());
         if (bll.checkLogin()) {
-            startActivity(new Intent(getContext(), MainActivity.class));
+            storeLoggedInStatusToSharedPreference();
+
+            Fragment profileFragment = new ProfileFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.frameLayout, profileFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else {
             Toast.makeText(getContext(), "loginCall fail ...", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private boolean validateLogin() {
+    private void storeLoggedInStatusToSharedPreference() {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("LOGIN", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("HAS_LOGGED_IN", true);
+        editor.putString("TOKEN", URL.token);
+        editor.apply();
+    }
+
+    private boolean validateInputs() {
         //check whether a phoneNo is Number or not ...
         try { Double.valueOf(phoneNo); }
         catch (NumberFormatException ex) {
             Log.i(TAG, ex.getLocalizedMessage());
             return false;
         }
-
+        //null validation ...
         if (phoneNo.length() <= 0) return false;
         else if (password.length() <= 0) return false;
         return true;

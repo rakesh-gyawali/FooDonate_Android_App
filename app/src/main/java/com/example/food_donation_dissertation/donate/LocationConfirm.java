@@ -20,7 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 public class LocationConfirm extends AppCompatActivity implements View.OnClickListener{
     private TextView tvMap, tvAddress, tvCancel;
     private ImageView imgCheck;
-    private Button btnContinue;
+    private Button btnConfirm;
     private final String TAG = "LocationConfirm started";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
 
         tvMap = findViewById(R.id.tvMap);
         tvAddress = findViewById(R.id.tvAddress);
-        btnContinue = findViewById(R.id.btnConfirm);
+        btnConfirm = findViewById(R.id.btnConfirm);
         imgCheck = findViewById(R.id.imgCheck);
         tvCancel = findViewById(R.id.tvCancel);
 
@@ -37,7 +37,7 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
-        btnContinue.setOnClickListener(this);
+        btnConfirm.setOnClickListener(this);
         tvCancel.setOnClickListener(this);
     }
     @Override
@@ -59,6 +59,9 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
                         .setMessage("Your request has been sent successfully. Check in Request Tab for more information.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
+
+
+
                                 LocationConfirm.this.finish();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

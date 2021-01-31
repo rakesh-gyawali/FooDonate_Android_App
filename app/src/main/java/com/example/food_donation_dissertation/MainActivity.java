@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.food_donation_dissertation.account.LoginFragment;
+import com.example.food_donation_dissertation.account.ProfileFragment;
 import com.example.food_donation_dissertation.donate.DonateFragment;
 import com.example.food_donation_dissertation.home.HomeFragment;
 import com.example.food_donation_dissertation.log.LogFragment;
@@ -38,8 +41,12 @@ BottomNavigationView bottom_navigation;
                         openFragment(new LogFragment());
                         return true;
                     case R.id.account:
-                        openFragment(new LoginFragment());
-                        return true;
+                        if (hasLoggedIn()) {
+                            openFragment(new ProfileFragment());
+                            return true;
+                        } else {
+                            openFragment(new LoginFragment());
+                        }
                 }
                 return false;
             }
@@ -50,6 +57,11 @@ BottomNavigationView bottom_navigation;
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private boolean hasLoggedIn() {
+        SharedPreferences savedData = getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        return savedData.getBoolean("HAS_LOGGED_IN", false);
     }
 
 }

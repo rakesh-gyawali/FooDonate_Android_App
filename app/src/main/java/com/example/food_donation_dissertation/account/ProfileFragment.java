@@ -1,18 +1,32 @@
 package com.example.food_donation_dissertation.account;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_donation_dissertation.R;
+import com.example.food_donation_dissertation.URL;
+import com.example.food_donation_dissertation.account.uploadImageDevelopment.UploadImageAPI;
+import com.example.food_donation_dissertation.account.userDevelopment.UserAPI;
+import com.example.food_donation_dissertation.account.userDevelopment.UserBLL;
+import com.example.food_donation_dissertation.account.userRegistrationDevelopment.UserRegistrationBLL;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class ProfileFragment extends Fragment {
-
-
+    private TextView tvName;
+    private TextView tvPhoneNo;
+    private MaterialToolbar toolbar;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -27,7 +41,44 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        tvName = view.findViewById(R.id.tvName);
+        tvPhoneNo = view.findViewById(R.id.tvPhoneNo);
+        toolbar = view.findViewById(R.id.topAppBar);
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.logOut) {
+                    //To Erase Login Data ...
+                    SharedPreferences savedData = view.getContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                    savedData.edit().clear().commit();
+                }
+                return false;
+            }
+        });
+
+        userCall();
+
+        return view;
+    }
+    private void userCall() {
+        URL.getStrictMode();
+
+        UserBLL bll = new UserBLL();
+        if (bll.checkGetUser()) {
+            tvName.setText(bll.returnUser().getFirstName() + " " +  bll.returnUser().getLastName());
+            tvPhoneNo.setText( bll.returnUser().getPhoneNo());
+        } else {
+            Toast.makeText(getContext(), "userCall Failed ...", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

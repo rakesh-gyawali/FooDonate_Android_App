@@ -1,8 +1,14 @@
 package com.example.food_donation_dissertation.account.userDevelopment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.food_donation_dissertation.MainActivity;
 import com.example.food_donation_dissertation.URL;
+import com.example.food_donation_dissertation.account.ProfileFragment;
 import com.example.food_donation_dissertation.account.userRegistrationDevelopment.RegistrationResponse;
 
 import retrofit2.Call;
@@ -12,26 +18,29 @@ public class UserBLL {
     private String firstName;
     private String lastName;
     private String phoneNo;
+    private String profilePicture;
+
     Response<UserResponse> response;
 
     public UserBLL() {
     }
 
-    public UserBLL(String firstName, String lastName, String phoneNo) {
+    public UserBLL(String firstName, String lastName, String phoneNo, String profilePicture) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNo = phoneNo;
     }
-
     public boolean checkGetUser() {
         UserAPI api = URL.getInstance().create(UserAPI.class);
-        Call<UserResponse> call = api.getUser(URL.token);
+        String token = getTokenFromSharedPreference();
+        if (token.isEmpty()) {
+            Log.i("UserBLL", "TOKEN IS EMPTY ...");
+            return false;
+        }
+        Call<UserResponse> call = api.getUser(token);
         try {
              response = call.execute();
             if (response.isSuccessful()) {
-                firstName = response.body().getFirstName();
-                lastName = response.body().getLastName();
-                phoneNo = response.body().getPhoneNo();
                 return true;
             }
         } catch (Exception e) {
@@ -42,4 +51,11 @@ public class UserBLL {
     public UserResponse returnUser() {
         return response.body();
     }
+
+    private String getTokenFromSharedPreference() {
+        Context applicationContext = MainActivity.getContextOfApplication();
+        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("TOKEN", "");
+    }
+
 }

@@ -119,8 +119,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (phoneNo.length() <= 0) return false;
         else if (password.length() <= 0) return false;
         return true;
-
     }
-
 
 }

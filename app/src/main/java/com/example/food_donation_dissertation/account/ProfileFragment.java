@@ -2,6 +2,8 @@ package com.example.food_donation_dissertation.account;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -18,19 +20,26 @@ import android.widget.Toast;
 import com.example.food_donation_dissertation.R;
 import com.example.food_donation_dissertation.URL;
 import com.example.food_donation_dissertation.account.uploadImageDevelopment.UploadImageAPI;
+import com.example.food_donation_dissertation.account.uploadImageDevelopment.UploadImageBLL;
 import com.example.food_donation_dissertation.account.userDevelopment.UserAPI;
 import com.example.food_donation_dissertation.account.userDevelopment.UserBLL;
 import com.example.food_donation_dissertation.account.userRegistrationDevelopment.UserRegistrationBLL;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
     private TextView tvName;
     private TextView tvPhoneNo;
     private MaterialToolbar toolbar;
+    private String profilePicture;
+    private CircleImageView imgProfile;
     public ProfileFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class ProfileFragment extends Fragment {
         tvName = view.findViewById(R.id.tvName);
         tvPhoneNo = view.findViewById(R.id.tvPhoneNo);
         toolbar = view.findViewById(R.id.topAppBar);
+        imgProfile = view.findViewById(R.id.imgProfile);
 
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +81,48 @@ public class ProfileFragment extends Fragment {
     }
     private void userCall() {
         URL.getStrictMode();
-
         UserBLL bll = new UserBLL();
         if (bll.checkGetUser()) {
             tvName.setText(bll.returnUser().getFirstName() + " " +  bll.returnUser().getLastName());
             tvPhoneNo.setText( bll.returnUser().getPhoneNo());
+            profilePicture = bll.returnUser().getProfilePicture();
+
+            profilePictureCall();
+
         } else {
             Toast.makeText(getContext(), "userCall Failed ...", Toast.LENGTH_SHORT).show();
         }
 
     }
+
+    private void profilePictureCall() {
+        // if no profile picture then ...
+        if (profilePicture.isEmpty()) return;
+        // if there is profile picture ...
+        UploadImageBLL imageBLL = new UploadImageBLL();
+        imageBLL.MakeStrict();
+        String imagePath = URL.IMAGE_BASE_URL +"uploads/" + profilePicture;
+        try {
+            java.net.URL url = new java.net.URL(imagePath);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            imgProfile.setImageBitmap(bmp);
+        } catch (MalformedURLException e) {
+            Toast.makeText(getContext(), "MalformedURLException", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        } catch (IOException e) {
+            Toast.makeText(getContext(), "IOException", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+//    public String getTokenFromSharedPreference() {
+//        SharedPreferences savedData =  getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+//        String token = savedData.getString("TOKEN", "");
+//        if (!token.isEmpty()) return token;
+//        else {
+//            Toast.makeText(getContext(), "TOKEN NOT FOUND IN SHARED PREFERENCE ...", Toast.LENGTH_SHORT).show();
+//            return token;
+//        }
+//    }
+
 }

@@ -19,9 +19,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottom_navigation;
+    public static Context _contextOfApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _contextOfApplication = getApplicationContext();
 
         setContentView(R.layout.activity_main);
         bottom_navigation = findViewById(R.id.bottom_navigation);
@@ -52,6 +54,11 @@ BottomNavigationView bottom_navigation;
             }
         });
     }
+
+    public static Context getContextOfApplication(){
+        return _contextOfApplication;
+    }
+
     void openFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);

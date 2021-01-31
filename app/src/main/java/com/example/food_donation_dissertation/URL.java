@@ -13,6 +13,8 @@ public class URL {
 
     public static String ipAddressOfYourHost = "192.168.1.88";
     public static final String BASE_URL = "http://" +ipAddressOfYourHost + ":3001/api/";
+    public static final String IMAGE_BASE_URL = "http://" +ipAddressOfYourHost + ":3001/";
+
 
 
 

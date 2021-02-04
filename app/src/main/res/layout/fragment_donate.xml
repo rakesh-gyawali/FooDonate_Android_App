@@ -71,7 +71,7 @@
                 app:singleLine="true"
                 >
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_1"
+                    android:id="@+id/chip_vegetable"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Vegetable"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2"
+                    android:id="@+id/chip_cookedFood"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Cooked Food"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_3"
+                    android:id="@+id/chip_packed_food"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Packed Food"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_5"
+                    android:id="@+id/chip_fruit"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Fruit"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_6"
+                    android:id="@+id/chip_grain_bean_rice"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Grain/Bean/Rice"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_7"
+                    android:id="@+id/chip_dairy"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     app:checkedIconTint="@color/white"
                     android:text="Dairy"/>
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_8"
+                    android:id="@+id/chip_others"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

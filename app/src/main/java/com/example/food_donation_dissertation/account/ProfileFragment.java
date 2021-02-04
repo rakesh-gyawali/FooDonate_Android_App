@@ -63,7 +63,7 @@ public class ProfileFragment extends Fragment {
                 if (item.getItemId() == R.id.logOut) {
                     //To Erase Login Data ...
                     SharedPreferences savedData = view.getContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-                    savedData.edit().clear().commit();
+                    savedData.edit().clear().apply();
 
                     Fragment loginFragment = new LoginFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();

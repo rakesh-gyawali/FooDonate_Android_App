@@ -13,10 +13,10 @@ public interface DonateLogAPI {
     @GET("api/donates/")
     Call<DonateLogResponse> checkGetDonate();
 
-    @FormUrlEncoded
-    @POST("api/donates")
-    Call<DonateLogResponse> checkPostDonate(@Field("requestedDate") Date requestedDate, @Field("pickUpDate") Date pickUpDate,
-                                            @Field("address") String address, @Field("lat") String lat, @Field("long") String longs,
-                                            @Field("charity") String charity, @Field("user") String user, @Field("quantity") String quantity,
-                                            @Field("expiryDate") String expiryDate, @Field("foodTypes") String foodTypes);
+//    @FormUrlEncoded
+//    @POST("api/donates")
+//    Call<DonateLogResponse> checkPostDonate(@Field("requestedDate") Date requestedDate, @Field("pickUpDate") Date pickUpDate,
+//                                            @Field("address") String address, @Field("lat") String lat, @Field("long") String longs,
+//                                            @Field("charity") String charity, @Field("user") String user, @Field("quantity") String quantity,
+//                                            @Field("expiryDate") String expiryDate, @Field("foodTypes") String foodTypes);
 }

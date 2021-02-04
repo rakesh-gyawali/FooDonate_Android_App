@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.food_donation_dissertation.MainActivity;
 import com.example.food_donation_dissertation.R;
+import com.example.food_donation_dissertation.log.donateLogDevelopment.DonateLogBLL;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class LocationConfirm extends AppCompatActivity implements View.OnClickListener{
@@ -22,6 +24,18 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
     private ImageView imgCheck;
     private Button btnConfirm;
     private final String TAG = "LocationConfirm started";
+
+    String addressLine;
+    private String quantity;
+    private String foodTypes;
+    private String charity;
+    private String expiryDate;
+    private String lats;
+    private String longs;
+    private String token;
+    private Boolean gotValues = false;
+    private String requestedDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +48,7 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         tvCancel = findViewById(R.id.tvCancel);
 
         getAddressFromSharedPreference();
+        getValuesFromIntent();
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
@@ -56,13 +71,10 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
             case R.id.btnConfirm:
                 new MaterialAlertDialogBuilder(this)
                         .setTitle("Success")
-                        .setMessage("Your request has been sent successfully. Check in Request Tab for more information.")
+                        .setMessage("Your request has been sent successfully. Check in Logs Tab to view status.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-
-                                LocationConfirm.this.finish();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
+                                postRequestCall();
                             }
                         }).show();
                 break;
@@ -72,9 +84,31 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+    private void postRequestCall() {
+        java.util.Date date = new java.util.Date();
+        getTokenFromSharedPreference();
+        DonateLogBLL bll = new DonateLogBLL(token, date.toString(), addressLine, lats, longs, charity, quantity, expiryDate, foodTypes);
+        if (bll.checkPostRequest()) {
+            LocationConfirm.this.finish();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "postRequestCall error ...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getTokenFromSharedPreference() {
+        SharedPreferences savedData = getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+        token = savedData.getString("TOKEN", "");
+
+    }
+
     private void getAddressFromSharedPreference() {
         SharedPreferences savedData = getSharedPreferences("USER_LOCATION", Context.MODE_PRIVATE);
-        String addressLine =  savedData.getString("address_line", "");
+        addressLine =  savedData.getString("address_line", "");
+        lats = savedData.getString("lat", "");
+        longs = savedData.getString("long", "");
+
         if (addressLine.isEmpty()) {
             tvAddress.setText("Address has not been set ...");
             imgCheck.setVisibility(View.INVISIBLE);
@@ -89,4 +123,23 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         //show check mark ...
         imgCheck.setVisibility(View.VISIBLE);
     }
+
+    private void getValuesFromIntent() {
+        try {
+            if (!getIntent().hasExtra("foodTypes") &&  !getIntent().hasExtra("quantity")
+                    &&  !getIntent().hasExtra("charity") ) return;
+
+            foodTypes = getIntent().getStringExtra("foodTypes");
+            quantity = getIntent().getStringExtra("quantity");
+            charity = getIntent().getStringExtra("charity");
+            //since expiry date is not compulsory ...
+            if (getIntent().hasExtra("expiryDate")) {
+                expiryDate = getIntent().getStringExtra("expiryDate");
+            } else expiryDate = "";
+        } catch (Exception ex) {
+            Toast.makeText(this, "Error while getting values from intent ...", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }

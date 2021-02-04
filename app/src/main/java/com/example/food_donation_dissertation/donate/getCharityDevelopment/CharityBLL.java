@@ -15,7 +15,6 @@ public class CharityBLL {
     private String name;
     Response<List<CharityResponse>> response;
 
-
     public boolean checkGetCharityName() {
         CharityAPI api = URL.getInstance().create(CharityAPI.class);
         Call<List<CharityResponse>> call = api.getCharitiesName();

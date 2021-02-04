@@ -20,7 +20,7 @@ public class UserBLL {
     private String phoneNo;
     private String profilePicture;
 
-    Response<UserResponse> response;
+    private Response<UserResponse> response;
 
     public UserBLL() {
     }

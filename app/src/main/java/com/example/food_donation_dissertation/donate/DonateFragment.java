@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.example.food_donation_dissertation.R;
 import com.example.food_donation_dissertation.URL;
 import com.example.food_donation_dissertation.donate.getCharityDevelopment.CharityBLL;
 import com.example.food_donation_dissertation.donate.getCharityDevelopment.CharityResponse;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.text.SimpleDateFormat;
@@ -42,6 +44,18 @@ import static android.content.Context.MODE_PRIVATE;
     private ChipGroup chipGroup;
     private List<CharityResponse> charityResponseList;
     private List<String> nameList;
+    private String foodTypes;
+    private String quantity;
+    private String expiryDate;
+    private String selectedCharity;
+
+//    private Chip vegetables;
+//    private Chip cookedFood;
+//    private Chip packedFood;
+//    private Chip fruit;
+//    private Chip grains_bean_rice;
+//    private Chip dairy;
+//    private Chip others;
 
     public DonateFragment() {
         // Required empty public constructor
@@ -65,6 +79,24 @@ import static android.content.Context.MODE_PRIVATE;
         chipGroup = view.findViewById(R.id.chipGroup);
         btnNext = view.findViewById(R.id.btnNext);
 
+        charityCall();
+
+//        vegetables = view.findViewById(R.id.chip_1);
+//        cookedFood = view.findViewById(R.id.chip_2);
+//        packedFood = view.findViewById(R.id.chip_3);
+//        fruit = view.findViewById(R.id.chip_4);
+//        grains_bean_rice = view.findViewById(R.id.chip_5);
+//        dairy = view.findViewById(R.id.chip_6);
+//        others = view.findViewById(R.id.chip_7);
+
+        //------auto complete text view--------
+        actvCharity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedCharity = charityResponseList.get(position).get_id();
+            }
+        });
+
         //-----date picker-------
         setUpDatePicker();
 
@@ -82,13 +114,15 @@ import static android.content.Context.MODE_PRIVATE;
             @Override
             public void onClick(View v) {
 //                storeRequestDonateValuesInStoredPreference();
+                getInputValues();
                 Intent intent = new Intent(getContext(), LocationConfirm.class);
+                intent.putExtra("foodTypes", foodTypes);
+                intent.putExtra("charity", selectedCharity);
+                intent.putExtra("quantity", quantity);
+                intent.putExtra("expiryDate", expiryDate);
                 startActivity(intent);
             }
         });
-        charityCall();
-
-
         return view;
     }
     private void charityCall() {
@@ -100,8 +134,9 @@ import static android.content.Context.MODE_PRIVATE;
             for (CharityResponse charity: charityResponseList) {
                 nameList.add(charity.getName());
             }
+
             if (nameList.size() <= 0) {
-                Toast.makeText(getContext(), "No Charity Registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No Charity Is Registered", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -111,29 +146,50 @@ import static android.content.Context.MODE_PRIVATE;
         } else {
             Toast.makeText(getContext(), "charityCall Failed ...", Toast.LENGTH_SHORT).show();
         }
-
     }
-
-
 
 //    private void storeRequestDonateValuesInStoredPreference () {
 //        getInputValues();
-//        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("SIGN_UP", MODE_PRIVATE);
+//        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("DONATE_REQUEST", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("firstname", firstname);
-//        editor.putString("lastname", lastname);
-//        editor.putString("phone", phone);
-//        editor.putString("password", password);
+//        editor.putString("foodTypes", foodTypes);
+//        editor.putString("quantity", quantity);
+//        editor.putString("expiryDate", expiryDate);
 //        editor.apply();
-//
 //    }
 //
-//    private void getInputValues() {
-//        firstname = edtFirstname.getText().toString();
-//        lastname = edtLastname.getText().toString();
-//        phone = edtPhone.getText().toString();
-//        password = edtPassword.getText().toString();
-//    }
+
+    private void getInputValues() {
+        foodTypes = "";
+        ArrayList<Integer> listCheckedChips = new ArrayList<>(chipGroup.getCheckedChipIds());
+        for (Integer id: listCheckedChips) {
+            switch (id) {
+                case R.id.chip_vegetable:
+                    foodTypes =  foodTypes.concat("vegetable,");
+                    break;
+                case R.id.chip_cookedFood:
+                    foodTypes =  foodTypes.concat("cooked food,");
+                    break;
+                case R.id.chip_packed_food:
+                    foodTypes =  foodTypes.concat("packed food,");
+                    break;
+                case R.id.chip_fruit:
+                    foodTypes =  foodTypes.concat("fruit,");
+                    break;
+                case R.id.chip_grain_bean_rice:
+                    foodTypes =  foodTypes.concat("grain bean rice,");
+                    break;
+                case R.id.chip_dairy:
+                    foodTypes =  foodTypes.concat("dairy,");
+                    break;
+                case R.id.chip_others:
+                    foodTypes =  foodTypes.concat("others");
+                    break;
+            }
+        }
+        quantity  =  edtQuantity.getText().toString();
+        expiryDate = edtDate.getText().toString();
+    }
 
     private void setUpDatePicker() {
         myCalendar = Calendar.getInstance();
@@ -154,6 +210,4 @@ import static android.content.Context.MODE_PRIVATE;
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         edtDate.setText(sdf.format(myCalendar.getTime()));
     }
-
-
-    }
+}

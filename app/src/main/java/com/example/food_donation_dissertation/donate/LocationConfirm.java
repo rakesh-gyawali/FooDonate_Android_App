@@ -33,8 +33,6 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
     private String lats;
     private String longs;
     private String token;
-    private Boolean gotValues = false;
-    private String requestedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +67,15 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btnConfirm:
+                postRequestCall();
                 new MaterialAlertDialogBuilder(this)
                         .setTitle("Success")
                         .setMessage("Your request has been sent successfully. Check in Logs Tab to view status.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                postRequestCall();
+                                LocationConfirm.this.finish();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                         }).show();
                 break;
@@ -89,9 +90,9 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         getTokenFromSharedPreference();
         DonateLogBLL bll = new DonateLogBLL(token, date.toString(), addressLine, lats, longs, charity, quantity, expiryDate, foodTypes);
         if (bll.checkPostRequest()) {
-            LocationConfirm.this.finish();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+//            LocationConfirm.this.finish();
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            startActivity(intent);
         } else {
             Toast.makeText(this, "postRequestCall error ...", Toast.LENGTH_SHORT).show();
         }
@@ -100,7 +101,6 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
     private void getTokenFromSharedPreference() {
         SharedPreferences savedData = getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
         token = savedData.getString("TOKEN", "");
-
     }
 
     private void getAddressFromSharedPreference() {

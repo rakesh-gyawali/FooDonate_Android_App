@@ -1,14 +1,9 @@
 package com.example.food_donation_dissertation.log.donateLogDevelopment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.example.food_donation_dissertation.MainActivity;
 import com.example.food_donation_dissertation.URL;
-import com.example.food_donation_dissertation.account.userDevelopment.UserAPI;
-import com.example.food_donation_dissertation.account.userDevelopment.UserResponse;
 import com.example.food_donation_dissertation.donate.requestDonateDevelopment.RequestDonateAPI;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -24,9 +19,11 @@ public class DonateLogBLL {
     private String expiryDate;
     private String foodTypes;
 
+    public DonateLogBLL(String token) {
+        this.token = token;
+    }
 
-
-    public DonateLogBLL(String token, String requestedDate, String address, String lat, String longs, String charity,  String quantity, String expiryDate, String foodTypes) {
+    public DonateLogBLL(String token, String requestedDate, String address, String lat, String longs, String charity, String quantity, String expiryDate, String foodTypes) {
         this.token = token;
         this.requestedDate = requestedDate;
         this.address = address;
@@ -38,17 +35,17 @@ public class DonateLogBLL {
         this.foodTypes = foodTypes;
     }
 
-
-
-    private Response<Void> response;
+    private Response<List<DonateLogResponse>> getResponse;
+    private Response<Void> postResponse;
 
     public boolean checkPostRequest() {
+        URL.getStrictMode();
         RequestDonateAPI api = URL.getInstance().create(RequestDonateAPI.class);
 
         Call<Void> call = api.postRequestDonate(token, requestedDate, address, lat, longs, charity, quantity, expiryDate, foodTypes);
         try {
-            response = call.execute();
-            if (response.isSuccessful()) {
+            postResponse = call.execute();
+            if (postResponse.isSuccessful()) {
                 return true;
             }
         } catch (Exception e) {
@@ -57,15 +54,27 @@ public class DonateLogBLL {
         return false;
     }
 
-//    public UserResponse returnUser() {
-//        return response.body();
-//    }
-    
+    public boolean checkGetLog() {
+        URL.getStrictMode();
+        DonateLogAPI api = URL.getInstance().create(DonateLogAPI.class);
 
-//    private String getTokenFromSharedPreference() {
-//        Context applicationContext = MainActivity.getContextOfApplication();
-//        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-//        return sharedPreferences.getString("TOKEN", "");
-//    }
+        Call<List<DonateLogResponse>> call = api.checkGetDonate(token);
+        try {
+            getResponse = call.execute();
+            if (getResponse.isSuccessful()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<DonateLogResponse> returnLogList() {
+        return getResponse.body();
+    }
+
+
+
 
 }

@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvName;
     private TextView tvPhoneNo;
     private MaterialToolbar toolbar;
-    private String profilePicture;
+    private String profilePicture = "";
     private CircleImageView imgProfile;
     public ProfileFragment() {
         // Required empty public constructor
@@ -97,7 +97,7 @@ public class ProfileFragment extends Fragment {
 
     private void profilePictureCall() {
         // if no profile picture then ...
-        if (profilePicture.isEmpty()) return;
+        if (profilePicture == null) return;
         // if there is profile picture ...
         UploadImageBLL imageBLL = new UploadImageBLL();
         imageBLL.MakeStrict();

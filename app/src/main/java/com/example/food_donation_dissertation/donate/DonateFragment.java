@@ -2,7 +2,6 @@
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,9 +19,8 @@ import android.widget.Toast;
 
 import com.example.food_donation_dissertation.R;
 import com.example.food_donation_dissertation.URL;
-import com.example.food_donation_dissertation.donate.getCharityDevelopment.CharityBLL;
+import com.example.food_donation_dissertation.donate.getCharityDevelopment.CharityAPI;
 import com.example.food_donation_dissertation.donate.getCharityDevelopment.CharityResponse;
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +29,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import static android.content.Context.MODE_PRIVATE;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
     public class DonateFragment extends Fragment {
@@ -64,8 +64,6 @@ import static android.content.Context.MODE_PRIVATE;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -79,15 +77,7 @@ import static android.content.Context.MODE_PRIVATE;
         chipGroup = view.findViewById(R.id.chipGroup);
         btnNext = view.findViewById(R.id.btnNext);
 
-        charityCall();
-
-//        vegetables = view.findViewById(R.id.chip_1);
-//        cookedFood = view.findViewById(R.id.chip_2);
-//        packedFood = view.findViewById(R.id.chip_3);
-//        fruit = view.findViewById(R.id.chip_4);
-//        grains_bean_rice = view.findViewById(R.id.chip_5);
-//        dairy = view.findViewById(R.id.chip_6);
-//        others = view.findViewById(R.id.chip_7);
+        charityAsyncCall();
 
         //------auto complete text view--------
         actvCharity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,28 +115,36 @@ import static android.content.Context.MODE_PRIVATE;
         });
         return view;
     }
-    private void charityCall() {
-        URL.getStrictMode();
-        CharityBLL bll = new CharityBLL();
-        if (bll.checkGetCharityName()) {
-            charityResponseList = bll.returnCharityNames();
-            nameList = new ArrayList<>();
-            for (CharityResponse charity: charityResponseList) {
-                nameList.add(charity.getName());
-            }
 
-            if (nameList.size() <= 0) {
-                Toast.makeText(getContext(), "No Charity Is Registered", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        public void charityAsyncCall() {
+            CharityAPI api = URL.getInstance().create(CharityAPI.class);
+            Call<List<CharityResponse>> call = api.getCharitiesName();
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.list_item, nameList);
-            actvCharity.setAdapter(arrayAdapter);
+            call.enqueue(new Callback<List<CharityResponse>>() {
+                @Override
+                public void onResponse(Call<List<CharityResponse>> call, Response<List<CharityResponse>> response) {
+                    if (response.isSuccessful()) {
+                        charityResponseList =  response.body();
+                        nameList = new ArrayList<>();
+                        for (CharityResponse charity: charityResponseList) {
+                            nameList.add(charity.getName());
+                        }
 
-        } else {
-            Toast.makeText(getContext(), "charityCall Failed ...", Toast.LENGTH_SHORT).show();
+                        if (nameList.size() <= 0) {
+                            Toast.makeText(getContext(), "No Charity Is Registered", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.list_item, nameList);
+                        actvCharity.setAdapter(arrayAdapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<CharityResponse>> call, Throwable t) {
+                    Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-    }
 
 //    private void storeRequestDonateValuesInStoredPreference () {
 //        getInputValues();

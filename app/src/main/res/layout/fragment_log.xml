@@ -51,6 +51,7 @@
                     android:text="Show Completed &amp; Cancelled Requests"
                     />
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/mSwitch"
                     android:layout_toRightOf="@id/tvInst"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -67,7 +68,7 @@
                 android:background="@color/colorGreyBackground"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvLog"
+                android:id="@+id/rcvLog"
                 android:layout_below="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

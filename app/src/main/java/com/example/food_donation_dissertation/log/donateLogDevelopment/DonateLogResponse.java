@@ -7,13 +7,13 @@ public class DonateLogResponse {
     private String lats;
     private String longs;
     private String status;
-    private String charity;
+    private Charity charity;
     private String user;
     private String quantity;
     private String expiryDate;
     private String foodTypes;
 
-    public DonateLogResponse(String requestedDate, String pickUpDate, String address, String lats, String longs, String status, String charity, String user, String quantity, String expiryDate, String foodTypes) {
+    public DonateLogResponse(String requestedDate, String pickUpDate, String address, String lats, String longs, String status, Charity charity, String user, String quantity, String expiryDate, String foodTypes) {
         this.requestedDate = requestedDate;
         this.pickUpDate = pickUpDate;
         this.address = address;
@@ -75,11 +75,11 @@ public class DonateLogResponse {
         this.status = status;
     }
 
-    public String getCharity() {
+    public Charity getCharity() {
         return charity;
     }
 
-    public void setCharity(String charity) {
+    public void setCharity(Charity charity) {
         this.charity = charity;
     }
 

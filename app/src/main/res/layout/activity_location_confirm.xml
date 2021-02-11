@@ -8,9 +8,9 @@
     tools:context=".donate.LocationConfirm">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/vegetable"
+        android:src="@drawable/nepal"
         android:background="#F5F5F5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -140,8 +140,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
-                style="@style/Widget.App.Button"
                 android:layout_below="@id/line2" />
+<!--            style="@style/Widget.App.Button"-->
             <TextView
                 android:id="@+id/tvCancel"
                 android:layout_width="match_parent"

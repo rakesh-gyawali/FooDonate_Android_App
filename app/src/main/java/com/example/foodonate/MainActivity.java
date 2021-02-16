@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.example.foodonate.donate.DonateFragment;
 import com.example.foodonate.home.HomeFragment;
 import com.example.foodonate.log.LogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottom_navigation;
@@ -37,10 +39,31 @@ BottomNavigationView bottom_navigation;
                         openFragment(new HomeFragment());
                         return true;
                     case R.id.donate:
-                        openFragment(new DonateFragment());
+                        if (hasLoggedIn()) {
+                            openFragment(new DonateFragment());
+                        } else {
+                            new MaterialAlertDialogBuilder(MainActivity.this)
+                                    .setTitle("Please Login")
+                                    .setMessage("Please login to view this page.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            openFragment(new LoginFragment());
+                                        }
+                                    }).show();
+                        }
                         return true;
                     case R.id.logs:
-                        openFragment(new LogFragment());
+                        if (hasLoggedIn()) openFragment(new LogFragment());
+                        else {
+                            new MaterialAlertDialogBuilder(MainActivity.this)
+                                    .setTitle("Please Login")
+                                    .setMessage("Please login to view this page.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            openFragment(new LoginFragment());
+                                        }
+                                    }).show();
+                        }
                         return true;
                     case R.id.account:
                         if (hasLoggedIn()) {

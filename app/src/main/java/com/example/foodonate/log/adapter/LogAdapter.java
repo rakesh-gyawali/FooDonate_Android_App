@@ -50,8 +50,9 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogItemHolder> {
         holder.tvRequestedOn.setText(requestedDate);
         //get shorter delivery date ...
         if (donateLogResponseList.get(position).getPickUpDate() != null) {
-            String [] arr2 = donateLogResponseList.get(position).getPickUpDate().split(" ");
-            deliveryDate = arr2[1] + " " + arr2[2] + " " + arr2[3].substring(0, 5);
+//            String [] arr2 = donateLogResponseList.get(position).getPickUpDate().split(" ");
+//            deliveryDate = arr2[1] + " " + arr2[2] + " " + arr2[3].substring(0, 5);
+            deliveryDate = donateLogResponseList.get(position).getPickUpDate();
         }
         //get shorter address ...
         String address = donateLogResponseList.get(position).getAddress();

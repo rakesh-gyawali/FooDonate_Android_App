@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.foodonate.MainActivity;
 import com.example.foodonate.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -78,9 +79,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     addressLine = addresses.get(0).getAddressLine(0);
                     storeToSharedPreference();
 
-                    Intent intent = new Intent(getApplicationContext(), LocationConfirm.class);
-                    MapsActivity.this.finish();
-                    startActivity(intent);
+                    Intent intent;
+                    try {
+                        Boolean isFromWelcomeScreen =  getIntent().getBooleanExtra("welcome_screen", false);
+                        MapsActivity.this.finish();
+                        if (isFromWelcomeScreen) {
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                           intent = new Intent(getApplicationContext(), LocationConfirm.class);
+                           startActivity(intent);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

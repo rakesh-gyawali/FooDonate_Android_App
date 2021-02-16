@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".account.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         >
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -18,6 +19,7 @@
                 app:title="My Profile"
                 app:titleTextColor="@color/black"
                 app:titleMarginTop="0dp"
+                app:menu="@menu/top_app_bar"
                 app:titleMarginBottom="0dp"
                 app:titleTextAppearance="@style/TextAppearance.App.Headline6"
                 android:layout_height="?attr/actionBarSize"
@@ -29,29 +31,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
+
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-            <ImageView
-                android:id="@+id/imgLogOut"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:clickable="true"
-                android:layout_marginBottom="40dp"
-                android:src="@drawable/ic_logout" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imgLogOut"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:clickable="true"-->
+<!--                android:layout_marginBottom="40dp"-->
+<!--                android:src="@drawable/ic_logout" />-->
+
             <de.hdodenhof.circleimageview.CircleImageView
+
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/imgProfile"
                 android:layout_width="96dp"
-                android:layout_below="@id/imgLogOut"
                 android:layout_height="96dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/profile"
                 app:civ_border_width="1dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="16dp"
                 app:civ_border_color="#757575"/>
             <LinearLayout
@@ -62,8 +67,6 @@
                 android:gravity="center"
                 android:paddingBottom="16sp"
                 >
-
-
             <LinearLayout
                 android:id="@+id/llIcons"
                 android:layout_width="wrap_content"
@@ -75,7 +78,7 @@
                     android:id="@+id/imgName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:src="@drawable/ic_user_1_"
                     android:layout_marginBottom="8dp"
                      />
                 <ImageView
@@ -86,37 +89,36 @@
                    />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgProfile"
-                android:orientation="vertical"
-                android:layout_marginBottom=""
-                android:layout_toRightOf="@+id/llIcons"
+                <LinearLayout
+                    android:id="@+id/llLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgProfile"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/llIcons"
 
-                >
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    android:layout_below="@+id/imgProfile"
-                    android:text="Name" />
-                <TextView
-                    android:id="@+id/tvPhoneNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    android:layout_below="@+id/tvName"
-                    android:text="Phone No" />
-            </LinearLayout>
+                    >
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/imgProfile"
+                        android:text="Name" />
+                    <TextView
+                        android:id="@+id/tvPhoneNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/tvName"
+                        android:text="Phone No" />
+                </LinearLayout>
             </LinearLayout>
             <Button
                 android:layout_width="wrap_content"
@@ -126,11 +128,6 @@
                 android:textSize="16dp"
                 android:layout_below="@id/llContainer"
                 />
-
-
         </RelativeLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
 </FrameLayout>

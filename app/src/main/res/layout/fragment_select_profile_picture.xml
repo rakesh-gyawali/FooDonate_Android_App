@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectProfilePictureFragment">
+    tools:context=".account.SelectProfilePictureFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.appbar.AppBarLayout
@@ -52,10 +52,24 @@
                 android:clickable="true"
                 />
             <Button
+                android:id="@+id/btnSelect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgPP"
-                android:text="Skip" />
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16dp"
+                android:text="Select Image" />
+
+            <TextView
+                android:id="@+id/tvSkip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:clickable="true"
+                android:text="SKIP"
+                android:layout_below="@id/btnSelect" />
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

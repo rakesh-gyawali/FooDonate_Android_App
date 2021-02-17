@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import com.example.foodonate.URL;
+import com.example.foodonate.util.SharedPreference;
 
 import java.io.IOException;
 
@@ -39,6 +40,7 @@ public class UserRegistrationBLL {
                 firstName = response.body().getFirstName();
                 lastName = response.body().getLastName();
                 phoneNo = response.body().getPhoneNo();
+                SharedPreference.storeLoggedInStatus();
                 isSuccess = true;
             }
         } catch (IOException e) {
@@ -50,7 +52,7 @@ public class UserRegistrationBLL {
     public boolean checkRegister() {
         isSuccess = false;
         UserRegistrationAPI userAPI = URL.getInstance().create(UserRegistrationAPI.class);
-        Call<RegistrationResponse> call =userAPI.checkRegister(phoneNo, password, firstName, lastName, profilePicture);
+        Call<RegistrationResponse> call = userAPI.checkRegister(phoneNo, password, firstName, lastName, profilePicture);
         try {
             Response<RegistrationResponse> response = call.execute();
             if (response.isSuccessful()) {

@@ -21,6 +21,7 @@ import com.example.foodonate.R;
 import com.example.foodonate.URL;
 import com.example.foodonate.account.uploadImageDevelopment.UploadImageBLL;
 import com.example.foodonate.account.userDevelopment.UserBLL;
+import com.example.foodonate.util.SharedPreference;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.io.IOException;
@@ -58,8 +59,8 @@ public class ProfileFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.logOut) {
                     //To Erase Login Data ...
-                    SharedPreferences savedData = view.getContext().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-                    savedData.edit().clear().apply();
+                    SharedPreference.clearLoggedInStatus();
+                    SharedPreference.clearAddress();
 
                     Fragment loginFragment = new LoginFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();

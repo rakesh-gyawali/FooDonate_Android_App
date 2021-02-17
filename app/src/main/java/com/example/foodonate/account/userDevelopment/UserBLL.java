@@ -1,11 +1,9 @@
 package com.example.foodonate.account.userDevelopment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.foodonate.MainActivity;
 import com.example.foodonate.URL;
+import com.example.foodonate.util.SharedPreference;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -29,7 +27,7 @@ public class UserBLL {
 
     public boolean checkGetUser() {
         UserAPI api = URL.getInstance().create(UserAPI.class);
-        String token = getTokenFromSharedPreference();
+        String token = SharedPreference.getToken();
         if (token.isEmpty()) {
             Log.i("UserBLL", "TOKEN IS EMPTY ...");
             return false;
@@ -48,12 +46,6 @@ public class UserBLL {
 
     public UserResponse returnUser() {
         return response.body();
-    }
-
-    private String getTokenFromSharedPreference() {
-        Context applicationContext = MainActivity.getContextOfApplication();
-        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("TOKEN", "");
     }
 
 }

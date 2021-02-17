@@ -18,6 +18,7 @@ import android.widget.Button;
 
 import com.example.foodonate.MainActivity;
 import com.example.foodonate.R;
+import com.example.foodonate.util.SharedPreference;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -77,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try {
                     List<Address> addresses = selectedAddress.getFromLocation(selectedLat, selectedLong, 1);
                     addressLine = addresses.get(0).getAddressLine(0);
-                    storeToSharedPreference();
+                    SharedPreference.storeAddress(getApplicationContext(), selectedLat, selectedLong, addressLine);
 
                     Intent intent;
                     try {
@@ -100,17 +101,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private void storeToSharedPreference() {
-        SharedPreferences sharedPreferences;
-
-        sharedPreferences = getSharedPreferences("USER_LOCATION", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("address_line", addressLine);
-        editor.putString("lat", String.valueOf(selectedLat));
-        editor.putString("long", String.valueOf(selectedLong));
-        editor.apply();
-    }
-
     public void setMyLocationLayerEnabled() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -126,13 +116,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     1);

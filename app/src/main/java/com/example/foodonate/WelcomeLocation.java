@@ -1,10 +1,14 @@
 package com.example.foodonate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodonate.donate.MapsActivity;
 
@@ -32,8 +37,8 @@ public class WelcomeLocation extends AppCompatActivity implements View.OnClickLi
         btnContinue = findViewById(R.id.btnConfirm);
         imgCheck = findViewById(R.id.imgCheck);
 
+        requestLocationPermission();
         getAddressFromSharedPreference();
-
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
@@ -46,11 +51,7 @@ public class WelcomeLocation extends AppCompatActivity implements View.OnClickLi
         Intent intent;
         switch (v.getId()) {
             case R.id.tvMap:
-                 intent = new Intent(getApplicationContext(), MapsActivity.class);
-                 startActivity(intent);
-                 break;
             case R.id.tvAddress:
-                Log.i(TAG, "tvAddress is pressed");
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
                 try {
                     Boolean isFromWelcomeScreen =  getIntent().getBooleanExtra("welcome_screen", false);
@@ -58,8 +59,8 @@ public class WelcomeLocation extends AppCompatActivity implements View.OnClickLi
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                 startActivity(intent);
-                 break;
+                startActivity(intent);
+                break;
             case R.id.btnConfirm:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 if (isAddressSelected) {
@@ -95,5 +96,37 @@ public class WelcomeLocation extends AppCompatActivity implements View.OnClickLi
         tvLater.setVisibility(View.INVISIBLE);
         isAddressSelected = true;
 
+    }
+
+    private void requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)){
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults){
+        switch (requestCode){
+            case 1: {
+                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
     }
 }

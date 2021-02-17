@@ -13,10 +13,9 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-
             app:title="FooDonate"
             app:titleTextColor="@color/colorPrimary"
-            app:subtitle="Maharajgunj, Kathmandu >"
+            app:subtitle="Address has not been set yet ..."
             app:titleMarginTop="0dp"
             app:titleMarginBottom="0dp"
             app:subtitleTextAppearance="@style/TextAppearance.App.Subtitle1"
@@ -52,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Charities near by"
+                android:text="Active charities"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary_text"

@@ -29,6 +29,7 @@ import com.example.foodonate.R;
 import com.example.foodonate.URL;
 import com.example.foodonate.account.uploadImageDevelopment.UploadImageBLL;
 import com.example.foodonate.account.userRegistrationDevelopment.UserRegistrationBLL;
+import com.example.foodonate.util.SharedPreference;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -83,7 +84,7 @@ public class SelectProfilePictureFragment extends Fragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        getAddressFromSharedPreference();
+        getSignUpInfoFromSharedPreference();
         switch (v.getId()) {
             case R.id.btnSelect:
                 if (isImageUploaded)  {
@@ -105,19 +106,26 @@ public class SelectProfilePictureFragment extends Fragment implements View.OnCli
         if (bll.checkRegister()) {
             Fragment profileFragment = new ProfileFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-            transaction.replace(R.id.frameLayout, profileFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+            SharedPreference.clearLoggedInStatus();
             Toast.makeText(getContext(), "registerCall done ...", Toast.LENGTH_SHORT).show();
+
+            if (bll.checkLogin()) {
+                transaction.replace(R.id.frameLayout, profileFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                Toast.makeText(getContext(), "login done ...", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(getContext(), "login failed ...", Toast.LENGTH_SHORT).show();
+
+            }
         } else {
             Toast.makeText(getContext(), "registerCall fail ...", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-
-    private void getAddressFromSharedPreference() {
+    private void getSignUpInfoFromSharedPreference() {
         SharedPreferences savedData = this.getActivity().getSharedPreferences("SIGN_UP", Context.MODE_PRIVATE);
         firstname =  savedData.getString("firstname", "");
         lastname =  savedData.getString("lastname", "");

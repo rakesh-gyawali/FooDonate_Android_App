@@ -21,6 +21,7 @@ import com.example.foodonate.R;
 import com.example.foodonate.URL;
 import com.example.foodonate.donate.getCharityDevelopment.CharityAPI;
 import com.example.foodonate.donate.getCharityDevelopment.CharityResponse;
+import com.example.foodonate.util.SharedPreference;
 import com.google.android.material.chip.ChipGroup;
 
 import java.text.SimpleDateFormat;
@@ -105,12 +106,8 @@ import retrofit2.Response;
             public void onClick(View v) {
 //                storeRequestDonateValuesInStoredPreference();
                 getInputValues();
-                Intent intent = new Intent(getContext(), LocationConfirm.class);
-                intent.putExtra("foodTypes", foodTypes);
-                intent.putExtra("charity", selectedCharity);
-                intent.putExtra("quantity", quantity);
-                intent.putExtra("expiryDate", expiryDate);
-                startActivity(intent);
+                SharedPreference.storeDonateInfo(getContext(), foodTypes, selectedCharity, quantity, expiryDate);
+                startActivity(new Intent(getContext(), LocationConfirm.class));
             }
         });
         return view;

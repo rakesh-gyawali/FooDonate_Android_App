@@ -1,8 +1,6 @@
 package com.example.foodonate.log;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -17,11 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.foodonate.MainActivity;
 import com.example.foodonate.R;
 import com.example.foodonate.log.adapter.LogAdapter;
 import com.example.foodonate.log.donateLogDevelopment.DonateLogBLL;
 import com.example.foodonate.log.donateLogDevelopment.DonateLogResponse;
+import com.example.foodonate.util.SharedPreference;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
@@ -49,24 +47,12 @@ public class LogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        if (ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)){
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }else{
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-        }
+        requestLocationPermission();
         View view = inflater.inflate(R.layout.fragment_log, container, false);
         mSwitch = view.findViewById(R.id.mSwitch);
         rcvLog = view.findViewById(R.id.rcvLog);
         rcvLog.setLayoutManager(new LinearLayoutManager(getContext()));
          logSyncCall();
-
 
         mSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +64,6 @@ public class LogFragment extends Fragment {
                     donateLogList = donateLogUnToggledList;
                 adapter = new LogAdapter(donateLogList, mSwitch.isChecked(), getContext());
                 rcvLog.setAdapter(adapter);
-
             }
         });
         return view;
@@ -116,7 +101,7 @@ public class LogFragment extends Fragment {
 //    }
 
     private void logSyncCall() {
-        DonateLogBLL bll = new DonateLogBLL(getTokenFromSharedPreference());
+        DonateLogBLL bll = new DonateLogBLL(SharedPreference.getToken());
         if (bll.checkGetLog()) {
             donateLogList =  bll.returnLogList();
                     for (DonateLogResponse log: donateLogList) {
@@ -133,10 +118,18 @@ public class LogFragment extends Fragment {
         }
     }
 
-    private String getTokenFromSharedPreference() {
-        Context applicationContext = MainActivity.getContextOfApplication();
-        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("TOKEN", "");
+    private void requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)){
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
     }
 
     @Override

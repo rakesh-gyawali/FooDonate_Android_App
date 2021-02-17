@@ -1,6 +1,5 @@
 package com.example.foodonate.account;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,8 +17,7 @@ import android.widget.Toast;
 import com.example.foodonate.R;
 import com.example.foodonate.URL;
 import com.example.foodonate.account.userRegistrationDevelopment.UserRegistrationBLL;
-
-import static android.content.Context.MODE_PRIVATE;
+import com.example.foodonate.util.SharedPreference;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -74,8 +72,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 password = edtPassword.getText().toString();
                 loginCall();
                 break;
-
-
         }
     }
 
@@ -85,7 +81,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         UserRegistrationBLL bll = new UserRegistrationBLL(edtPhone.getText().toString(), edtPassword.getText().toString());
         if (bll.checkLogin()) {
-            storeLoggedInStatusToSharedPreference();
+//            SharedPreference.storeLoggedInStatus();
 
             Fragment profileFragment = new ProfileFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -96,14 +92,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         } else {
             Toast.makeText(getContext(), "loginCall fail ...", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void storeLoggedInStatusToSharedPreference() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("LOGIN", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("HAS_LOGGED_IN", true);
-        editor.putString("TOKEN", URL.token);
-        editor.apply();
     }
 
     private boolean validateInputs() {

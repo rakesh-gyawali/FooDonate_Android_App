@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import com.example.foodonate.R;
+import com.example.foodonate.util.SharedPreference;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -59,7 +60,9 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!validateInputs()) return;
-                storeToSharedPreference();
+                getValuesFromEditText();
+                SharedPreference.storeSignUpInfo(firstname, lastname, phone, password);
+//                storeToSharedPreference();
 
                 Fragment selectProfilePicturesFragment = new SelectProfilePictureFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -72,7 +75,6 @@ public class SignUpFragment extends Fragment {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getActivity().onBackPressed();
             }
         });
@@ -95,7 +97,6 @@ public class SignUpFragment extends Fragment {
         phone = edtPhone.getText().toString();
         password = edtPassword.getText().toString();
     }
-
 
     private boolean validateInputs() {
         return true;

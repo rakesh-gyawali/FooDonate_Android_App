@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.foodonate.MainActivity;
 import com.example.foodonate.R;
 import com.example.foodonate.log.donateLogDevelopment.DonateLogBLL;
+import com.example.foodonate.util.SharedPreference;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class LocationConfirm extends AppCompatActivity implements View.OnClickListener{
@@ -46,7 +47,8 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         tvCancel = findViewById(R.id.tvCancel);
 
         getAddressFromSharedPreference();
-        getValuesFromIntent();
+        getDonateValuesFromSharedPreference();
+//        getValuesFromIntent();
 
         tvMap.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
@@ -58,11 +60,7 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         Intent intent;
         switch (v.getId()) {
             case R.id.tvMap:
-                intent = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(intent);
-                break;
             case R.id.tvAddress:
-                Log.i(TAG, "tvAddress is pressed");
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(intent);
                 break;
@@ -87,20 +85,12 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
     }
     private void postRequestCall() {
         java.util.Date date = new java.util.Date();
-        getTokenFromSharedPreference();
-        DonateLogBLL bll = new DonateLogBLL(token, date.toString(), addressLine, lats, longs, charity, quantity, expiryDate, foodTypes);
+        DonateLogBLL bll = new DonateLogBLL(SharedPreference.getToken(), date.toString(), addressLine, lats, longs, charity, quantity, expiryDate, foodTypes);
         if (bll.checkPostRequest()) {
-//            LocationConfirm.this.finish();
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
+            SharedPreference.clearDonateInfo(getApplicationContext());
         } else {
             Toast.makeText(this, "postRequestCall error ...", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void getTokenFromSharedPreference() {
-        SharedPreferences savedData = getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-        token = savedData.getString("TOKEN", "");
     }
 
     private void getAddressFromSharedPreference() {
@@ -124,22 +114,11 @@ public class LocationConfirm extends AppCompatActivity implements View.OnClickLi
         imgCheck.setVisibility(View.VISIBLE);
     }
 
-    private void getValuesFromIntent() {
-        try {
-            if (!getIntent().hasExtra("foodTypes") &&  !getIntent().hasExtra("quantity")
-                    &&  !getIntent().hasExtra("charity") ) return;
-
-            foodTypes = getIntent().getStringExtra("foodTypes");
-            quantity = getIntent().getStringExtra("quantity");
-            charity = getIntent().getStringExtra("charity");
-            //since expiry date is not compulsory ...
-            if (getIntent().hasExtra("expiryDate")) {
-                expiryDate = getIntent().getStringExtra("expiryDate");
-            } else expiryDate = "";
-        } catch (Exception ex) {
-            Toast.makeText(this, "Error while getting values from intent ...", Toast.LENGTH_SHORT).show();
-        }
-
+    private void getDonateValuesFromSharedPreference() {
+        SharedPreferences savedData = getSharedPreferences("DONATE", Context.MODE_PRIVATE);
+        foodTypes = savedData.getString("foodTypes", "");
+        charity = savedData.getString("charity", "");
+        quantity = savedData.getString("quantity", "");
+        expiryDate = savedData.getString("expiryDate", "");
     }
-
 }

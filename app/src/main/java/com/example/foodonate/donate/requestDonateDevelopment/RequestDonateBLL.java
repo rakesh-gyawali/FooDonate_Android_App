@@ -34,11 +34,6 @@ public class RequestDonateBLL {
 
     public boolean checkPostDonation() {
         RequestDonateAPI requestDonateAPI = URL.getInstance().create(RequestDonateAPI.class);
-//        String token = getTokenFromSharedPreference();
-//        if (token.isEmpty()) {
-//            Log.i("RequestDonateBLL", "TOKEN IS EMPTY ...");
-//            return false;
-//        }
         Call<Void> call = requestDonateAPI.postRequestDonate(token, requestedDate, address, lats, longs, charity, quantity, expiryDate, foodTypes);
 
         try {
@@ -48,12 +43,5 @@ public class RequestDonateBLL {
             e.printStackTrace();
             return false;
         }
-    }
-
-
-    private String getTokenFromSharedPreference() {
-        Context applicationContext = MainActivity.getContextOfApplication();
-        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("TOKEN", "");
     }
 }

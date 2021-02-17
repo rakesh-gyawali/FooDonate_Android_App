@@ -1,7 +1,12 @@
 package com.example.foodonate.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +20,7 @@ import android.widget.ImageView;
 import com.example.foodonate.R;
 import com.example.foodonate.home.adapters.RecentActivityAdapter;
 import com.example.foodonate.home.adapters.RowItemAdapter;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -31,6 +37,8 @@ public class HomeFragment extends Fragment {
     ArrayList<String> mActAddresses;
     ArrayList<String> mActDates;
 
+    MaterialToolbar topAppBar;
+
     private static final String TAG = "HomeFragment";
 
     public HomeFragment() {
@@ -42,9 +50,15 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        topAppBar = view.findViewById(R.id.topAppBar);
+        topAppBar.setSubtitleTextColor(getContext().getColor(R.color.colorAddress));
+        getAddressFromSharedPreference();
+
         //-----carousel view -----
         CarouselView carouselView;
         int[] sampleImages = {R.drawable.page3, R.drawable.page2, R.drawable.page1};
@@ -135,12 +149,26 @@ public class HomeFragment extends Fragment {
     }
 
     private void initActRecyclerView(View view) {
-        Log.d(TAG, "initRecentRecyclerView: init recyclerview");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = view.findViewById(R.id.rvRowItem2);
         recyclerView.setLayoutManager(layoutManager);
         RecentActivityAdapter adapter = new RecentActivityAdapter (mActNames, mActLogos , mActBanners, mActAddresses, mActDates, getContext());
         recyclerView.setAdapter(adapter);
+    }
+
+    private void getAddressFromSharedPreference() {
+        SharedPreferences savedData = getContext().getSharedPreferences("USER_LOCATION", Context.MODE_PRIVATE);
+        String addressLine =  savedData.getString("address_line", "");
+        if (addressLine.isEmpty()) {
+            topAppBar.setSubtitle("");
+            return;
+        } else if (addressLine.length() > 35) {
+            //shorten addressLine to fit in card view ...
+            String addressLineInShort =  addressLine.substring(0, 30);
+            topAppBar.setSubtitle(addressLineInShort.concat(" .... >"));
+        } else {
+            topAppBar.setSubtitle(addressLine + " >");
+        }
     }
 
 

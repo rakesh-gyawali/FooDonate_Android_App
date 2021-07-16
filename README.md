@@ -4,12 +4,26 @@ This is Food Donation Android based application. The app use RESTful API to comm
 
 ## Table of contents
 * [General info](#general-info)
+* [Preview](#preview)
 * [Links for repo](#links-for-repos)
 * [Main technologies and libraries used](#main-technologies-and-libraries-used)
 * [Setup](#setup)
 
 ## General info
 With the app user can send pick up request to the charity to collect the foods that user want to donate. The charity can view the location of the user in the google map. Two apps are created for this. One is for user and another is for charity. The apps communicate with backend via RESTful API.
+
+## Preview
+<div align="center">
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/splash_screen_user.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/Login.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/signup.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/home_user.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/donate_user.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/confirm_location.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/googlemap.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/Log.jpg" width="300px"</img> 
+    <img src="https://github.com/rakesh-gyawali/FooDonate_User/blob/master/screenshots/profile_user.jpg" width="300px"</img>
+</div>
 
 ## Main features
 1. Registration by User and Charity.

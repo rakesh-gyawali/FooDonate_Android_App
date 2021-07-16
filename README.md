@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # FooDonate_User
 This is Food Donation Android based application. The app use RESTful API to communicate with backend. 
@@ -56,9 +55,3 @@ SECRET='REPLACE_WITH_ANY_CHARACTERS'
 8. Run the app and click on Sign Up and create the account.
 9. Open the Food Donate User folder with Android Studio and repeat 5-8. Now, you can use the app.
 
-
-
-=======
-# FooDonate
-Food Donation System...
->>>>>>> parent of eedda6e... Update README.md

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class LogFragment extends Fragment {
 
     private SwitchMaterial mSwitch;
     private RecyclerView rcvLog;
+    SwipeRefreshLayout swipeRefreshLayout;
     LogAdapter adapter;
     public LogFragment() {
         // Required empty public constructor
@@ -52,12 +54,12 @@ public class LogFragment extends Fragment {
         mSwitch = view.findViewById(R.id.mSwitch);
         rcvLog = view.findViewById(R.id.rcvLog);
         rcvLog.setLayoutManager(new LinearLayoutManager(getContext()));
+//        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
          logSyncCall();
 
         mSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (mSwitch.isChecked())
                     donateLogList = donateLogToggledList;
                 else
@@ -66,6 +68,15 @@ public class LogFragment extends Fragment {
                 rcvLog.setAdapter(adapter);
             }
         });
+
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                logSyncCall();
+//                adapter = new LogAdapter(donateLogList, mSwitch.isChecked(), getContext());
+//                rcvLog.setAdapter(adapter);
+//            }
+//        });
         return view;
     }
 

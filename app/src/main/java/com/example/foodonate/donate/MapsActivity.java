@@ -76,13 +76,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 Geocoder selectedAddress = new Geocoder(getApplicationContext());
                 try {
-                    List<Address> addresses = selectedAddress.getFromLocation(selectedLat, selectedLong, 1);
+                    List<Address> addresses = selectedAddress.getFromLocation(selectedLat, selectedLong,
+                            1);
                     addressLine = addresses.get(0).getAddressLine(0);
-                    SharedPreference.storeAddress(getApplicationContext(), selectedLat, selectedLong, addressLine);
-
+                    SharedPreference.storeAddress(getApplicationContext(), selectedLat,
+                            selectedLong, addressLine);
                     Intent intent;
                     try {
-                        Boolean isFromWelcomeScreen =  getIntent().getBooleanExtra("welcome_screen", false);
+                        Boolean isFromWelcomeScreen =  getIntent().getBooleanExtra("welcome_screen",
+                                false);
                         MapsActivity.this.finish();
                         if (isFromWelcomeScreen) {
                             intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # FooDonate_User
 This is Food Donation Android based application. The app use RESTful API to communicate with backend. 
@@ -8,7 +9,7 @@ This is Food Donation Android based application. The app use RESTful API to comm
 * [Main technologies and libraries used](#main-technologies-and-libraries-used)
 * [Setup](#setup)
 
-##General info
+## General info
 With the app user can send pick up request to the charity to collect the foods that user want to donate. The charity can view the location of the user in the google map. Two apps are created for this. One is for user and another is for charity. The apps communicate with backend via RESTful API.
 
 ## Main features
@@ -19,13 +20,13 @@ With the app user can send pick up request to the charity to collect the foods t
 5. Display name and logo of charities in the Home page in User app. (For now only displays static data. Planning to display details of charity from backend server)
 6. Display food distribution events that Charities are organizing. (For now only displays static data. Planning to display event details of charity from backend server)
 
-##Links for repo
+## Links for repos
 * FooDonate User: https://github.com/rakesh-gyawali/FooDonate_User.git
 * FooDonate charity: https://github.com/rakesh-gyawali/FooDonate_Charity.git
 * FooDonate backend: https://github.com/rakesh-gyawali/FooDonate_Backend.git
 
 ## Main technologies and libraries used
-1. Backend
+Backend
 * Node version: 14.16.0
 * MongoDB version:  4.4.1 Community
 * bcryptjs version: 2.4.3,
@@ -35,25 +36,29 @@ With the app user can send pick up request to the charity to collect the foods t
 * mongoose version: 5.11.13,
 * multer version: 1.4.2
 
-2. FooDonate for user and charity
+Android apps for user and charity
 * retrofit2 version: 2.6.1 
 * de.hdodenhof:circleimageview: 3.1.0
 
 ## Setup
 1. Clone all the repos listed above.
 2. Open the backend root folder with terminal and enter `npm install`
-3. Create file named ".env" in backend root folder and type the info as given below:
-------------------------------------
+3. Create file named ".env" in backend root folder and copy-paste, change the values and save.
+```
 Port=3001 
 dbURI='YOUR_MongoDB_URL'
 SECRET='REPLACE_WITH_ANY_CHARACTERS'
-------------------------------------
+```
 4. Enter 'npm start' to run the server.
 5. Open the Food Donate Charity folder with Android Studio.
-6. Open Project Windows and select "Android" from the tab.
-7. Click com.example.foodonate/URL/ file and change the value of "BASE_URL" string variable to your IP Address.
+6. Press shift key 2 times quickly to open file search and type URL to open URL file.
+7. In URL file change the value of "BASE_URL" string variable to your IP Address.
 8. Run the app and click on Sign Up and create the account.
 9. Open the Food Donate User folder with Android Studio and repeat 5-8. Now, you can use the app.
 
 
 
+=======
+# FooDonate
+Food Donation System...
+>>>>>>> parent of eedda6e... Update README.md

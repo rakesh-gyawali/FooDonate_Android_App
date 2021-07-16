@@ -42,7 +42,8 @@ public class DonateLogBLL {
         URL.getStrictMode();
         RequestDonateAPI api = URL.getInstance().create(RequestDonateAPI.class);
 
-        Call<Void> call = api.postRequestDonate(token, requestedDate, address, lat, longs, charity, quantity, expiryDate, foodTypes);
+        Call<Void> call = api.postRequestDonate(token, requestedDate, address, lat,
+                longs, charity, quantity, expiryDate, foodTypes);
         try {
             postResponse = call.execute();
             if (postResponse.isSuccessful()) {

@@ -29,7 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <RelativeLayout
+<!--        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--            android:id="@+id/refreshLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+           <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp">
@@ -75,6 +79,7 @@
                 >
             </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
+<!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
     </androidx.core.widget.NestedScrollView>
 
 

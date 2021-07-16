@@ -1,6 +1,8 @@
 package com.example.foodonate.account;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,14 +16,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodonate.MainActivity;
 import com.example.foodonate.R;
 import com.example.foodonate.URL;
 import com.example.foodonate.account.uploadImageDevelopment.UploadImageBLL;
 import com.example.foodonate.account.userDevelopment.UserBLL;
 import com.example.foodonate.util.SharedPreference;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.io.IOException;
@@ -34,7 +39,10 @@ public class ProfileFragment extends Fragment {
     private TextView tvPhoneNo;
     private MaterialToolbar toolbar;
     private String profilePicture = "";
+    private String phoneNo;
     private CircleImageView imgProfile;
+    private Button btnUpdate;
+    private Bitmap bmp;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -53,6 +61,7 @@ public class ProfileFragment extends Fragment {
         tvPhoneNo = view.findViewById(R.id.tvPhoneNo);
         toolbar = view.findViewById(R.id.topAppBar);
         imgProfile = view.findViewById(R.id.imgProfile);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -72,8 +81,30 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        userCall();
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
+                intent.putExtra("profile_picture", profilePicture);
+                intent.putExtra("phone", phoneNo);
+                startActivity(intent);
+            }
+        });
 
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                View mView = getLayoutInflater().inflate(R.layout.image_viewer, null);
+                PhotoView photoView = mView.findViewById(R.id.imageView);
+                photoView.setImageBitmap(bmp);
+                mBuilder.setView(mView);
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
+
+        userCall();
         return view;
     }
     private void userCall() {
@@ -81,9 +112,9 @@ public class ProfileFragment extends Fragment {
         UserBLL bll = new UserBLL();
         if (bll.checkGetUser()) {
             tvName.setText(bll.returnUser().getFirstName() + " " +  bll.returnUser().getLastName());
-            tvPhoneNo.setText( bll.returnUser().getPhoneNo());
+            phoneNo = bll.returnUser().getPhoneNo();
+            tvPhoneNo.setText(phoneNo);
             profilePicture = bll.returnUser().getProfilePicture();
-
             profilePictureCall();
 
         } else {
@@ -101,7 +132,7 @@ public class ProfileFragment extends Fragment {
         String imagePath = URL.IMAGE_BASE_URL +"uploads/" + profilePicture;
         try {
             java.net.URL url = new java.net.URL(imagePath);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             imgProfile.setImageBitmap(bmp);
         } catch (MalformedURLException e) {
             Toast.makeText(getContext(), "MalformedURLException", Toast.LENGTH_SHORT).show();
@@ -111,5 +142,4 @@ public class ProfileFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
 }

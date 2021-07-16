@@ -23,6 +23,7 @@ import com.example.foodonate.donate.getCharityDevelopment.CharityAPI;
 import com.example.foodonate.donate.getCharityDevelopment.CharityResponse;
 import com.example.foodonate.util.SharedPreference;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,27 +37,20 @@ import retrofit2.Response;
 
 
     public class DonateFragment extends Fragment {
-    private EditText edtDate;
-    private EditText edtQuantity;
-    private AutoCompleteTextView actvCharity;
-    private Calendar myCalendar;
-    private DatePickerDialog.OnDateSetListener date;
-    private Button btnNext;
-    private ChipGroup chipGroup;
-    private List<CharityResponse> charityResponseList;
-    private List<String> nameList;
-    private String foodTypes;
-    private String quantity;
-    private String expiryDate;
-    private String selectedCharity;
-
-//    private Chip vegetables;
-//    private Chip cookedFood;
-//    private Chip packedFood;
-//    private Chip fruit;
-//    private Chip grains_bean_rice;
-//    private Chip dairy;
-//    private Chip others;
+        private TextInputLayout tfQuantity;
+        private EditText edtDate;
+        private EditText edtQuantity;
+        private AutoCompleteTextView actvCharity;
+        private Calendar myCalendar;
+        private DatePickerDialog.OnDateSetListener date;
+        private Button btnNext;
+        private ChipGroup chipGroup;
+        private List<CharityResponse> charityResponseList;
+        private List<String> nameList;
+        private String foodTypes;
+        private String quantity;
+        private String expiryDate;
+        private String selectedCharity;
 
     public DonateFragment() {
         // Required empty public constructor
@@ -72,6 +66,7 @@ import retrofit2.Response;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_donate, container, false);
+        tfQuantity = view.findViewById(R.id.tfQuantity);
         edtDate = view.findViewById(R.id.edtDate);
         edtQuantity = view.findViewById(R.id.edtQuantity);
         actvCharity = view.findViewById(R.id.actvCharity);
@@ -104,7 +99,7 @@ import retrofit2.Response;
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                storeRequestDonateValuesInStoredPreference();
+                if (!validation()) return;
                 getInputValues();
                 SharedPreference.storeDonateInfo(getContext(), foodTypes, selectedCharity, quantity, expiryDate);
                 startActivity(new Intent(getContext(), LocationConfirm.class));
@@ -142,17 +137,6 @@ import retrofit2.Response;
                 }
             });
         }
-
-//    private void storeRequestDonateValuesInStoredPreference () {
-//        getInputValues();
-//        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("DONATE_REQUEST", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("foodTypes", foodTypes);
-//        editor.putString("quantity", quantity);
-//        editor.putString("expiryDate", expiryDate);
-//        editor.apply();
-//    }
-//
 
     private void getInputValues() {
         foodTypes = "";
@@ -204,5 +188,15 @@ import retrofit2.Response;
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         edtDate.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private Boolean validation() {
+        getInputValues();
+        if (quantity.isEmpty() || Integer.valueOf(quantity)  == 0)  {
+            tfQuantity.setErrorEnabled(true);
+            tfQuantity.setError("Please enter food quantity");
+            return false;
+        }
+        return true;
     }
 }

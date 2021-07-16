@@ -15,5 +15,5 @@ public interface UserAPI {
 
     @FormUrlEncoded
     @PUT("users")
-    Call<LoginResponse> checkLogin(@Field("phoneNo") String phoneNo, @Field("password") String password);
+    Call<Void> putUser(@Header("Authorization") String header, @Field("firstName") String firstName, @Field("lastName") String lastName, @Field("phoneNo") String phoneNo, @Field("password") String password, @Field("profilePicture") String profilePicture);
 }

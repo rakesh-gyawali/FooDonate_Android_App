@@ -1,0 +1,386 @@
+@startuml
+
+title __FOODONATE.APP's Class Diagram__\n
+
+  namespace com.example.foodonate {
+    class com.example.foodonate.BuildConfig {
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    class com.example.foodonate.MainActivity {
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    class com.example.foodonate.SplashScreenActivity {
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    class com.example.foodonate.URL {
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    class com.example.foodonate.WelcomeLocation {
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      class com.example.foodonate.account.LoginFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      class com.example.foodonate.account.ProfileFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      class com.example.foodonate.account.SelectProfilePictureFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      class com.example.foodonate.account.SignUpFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      class com.example.foodonate.account.UpdateProfileActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace uploadImageDevelopment {
+        interface com.example.foodonate.account.uploadImageDevelopment.UploadImageAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace uploadImageDevelopment {
+        class com.example.foodonate.account.uploadImageDevelopment.UploadImageBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace uploadImageDevelopment {
+        class com.example.foodonate.account.uploadImageDevelopment.UploadImageResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userDevelopment {
+        interface com.example.foodonate.account.userDevelopment.UserAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userDevelopment {
+        class com.example.foodonate.account.userDevelopment.UserBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userDevelopment {
+        class com.example.foodonate.account.userDevelopment.UserResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userRegistrationDevelopment {
+        class com.example.foodonate.account.userRegistrationDevelopment.LoginResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userRegistrationDevelopment {
+        class com.example.foodonate.account.userRegistrationDevelopment.RegistrationResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userRegistrationDevelopment {
+        interface com.example.foodonate.account.userRegistrationDevelopment.UserRegistrationAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace account {
+      namespace userRegistrationDevelopment {
+        class com.example.foodonate.account.userRegistrationDevelopment.UserRegistrationBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      class com.example.foodonate.donate.DonateFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      class com.example.foodonate.donate.LocationConfirm {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      class com.example.foodonate.donate.MapsActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace getCharityDevelopment {
+        interface com.example.foodonate.donate.getCharityDevelopment.CharityAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace getCharityDevelopment {
+        class com.example.foodonate.donate.getCharityDevelopment.CharityBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace getCharityDevelopment {
+        class com.example.foodonate.donate.getCharityDevelopment.CharityResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace requestDonateDevelopment {
+        interface com.example.foodonate.donate.requestDonateDevelopment.RequestDonateAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace requestDonateDevelopment {
+        class com.example.foodonate.donate.requestDonateDevelopment.RequestDonateBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace donate {
+      namespace requestDonateDevelopment {
+        class com.example.foodonate.donate.requestDonateDevelopment.RequestDonateResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace home {
+      class com.example.foodonate.home.HomeFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace home {
+      namespace adapters {
+        class com.example.foodonate.home.adapters.RecentActivityAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace home {
+      namespace adapters {
+        class com.example.foodonate.home.adapters.RowItemAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      class com.example.foodonate.log.LogFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      namespace adapter {
+        class com.example.foodonate.log.adapter.LogAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      namespace donateLogDevelopment {
+        class com.example.foodonate.log.donateLogDevelopment.Charity {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      namespace donateLogDevelopment {
+        interface com.example.foodonate.log.donateLogDevelopment.DonateLogAPI {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      namespace donateLogDevelopment {
+        class com.example.foodonate.log.donateLogDevelopment.DonateLogBLL {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace log {
+      namespace donateLogDevelopment {
+        class com.example.foodonate.log.donateLogDevelopment.DonateLogResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.foodonate {
+    namespace util {
+      class com.example.foodonate.util.SharedPreference {
+      }
+    }
+  }
+  
+
+  com.example.foodonate.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.foodonate.SplashScreenActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.foodonate.WelcomeLocation .up.|> android.view.View.OnClickListener
+  com.example.foodonate.WelcomeLocation -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.foodonate.account.LoginFragment .up.|> android.view.View.OnClickListener
+  com.example.foodonate.account.LoginFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.account.ProfileFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.account.SelectProfilePictureFragment .up.|> android.view.View.OnClickListener
+  com.example.foodonate.account.SelectProfilePictureFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.account.SelectProfilePictureFragment o-- com.example.foodonate.account.uploadImageDevelopment.UploadImageBLL : uploadImageBLL
+  com.example.foodonate.account.SignUpFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.account.UpdateProfileActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.foodonate.donate.DonateFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.donate.LocationConfirm .up.|> android.view.View.OnClickListener
+  com.example.foodonate.donate.LocationConfirm -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.foodonate.donate.MapsActivity .up.|> com.google.android.gms.maps.OnMapReadyCallback
+  com.example.foodonate.donate.MapsActivity -up-|> androidx.fragment.app.FragmentActivity
+  com.example.foodonate.home.HomeFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.home.adapters.RecentActivityAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.foodonate.home.adapters.RowItemAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.foodonate.log.LogFragment -up-|> androidx.fragment.app.Fragment
+  com.example.foodonate.log.LogFragment o-- com.example.foodonate.log.adapter.LogAdapter : adapter
+  com.example.foodonate.log.adapter.LogAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.foodonate.log.donateLogDevelopment.DonateLogResponse o-- com.example.foodonate.log.donateLogDevelopment.Charity : charity
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

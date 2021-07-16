@@ -140,7 +140,7 @@
         </HorizontalScrollView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfEmail"
+                android:id="@+id/tfQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total quantity in Kg *"
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_below="@+id/tfEmail"
+                android:layout_below="@+id/tfQuantity"
                 android:hint="Select charity to donate *"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@drawable/ic_organization"

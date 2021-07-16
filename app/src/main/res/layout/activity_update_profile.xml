@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frag_signUp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".account.SignUpFragment">
+    tools:context=".account.UpdateProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            app:title="Sign Up"
+            app:title="Profile Update"
             app:titleTextColor="@color/black"
             app:titleMarginTop="0dp"
             app:titleMarginBottom="0dp"
@@ -63,23 +62,6 @@
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone number"
-                android:layout_marginBottom="16dp"
-                app:startIconDrawable="@drawable/ic_phone_call"
-                android:layout_below="@+id/tfLname"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tfPassword"
@@ -89,7 +71,7 @@
                 android:layout_marginBottom="16dp"
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@drawable/ic_padlock"
-                android:layout_below="@+id/tfPhone"
+                android:layout_below="@+id/tfLname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -99,35 +81,54 @@
                     android:inputType="textPassword"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:id="@+id/btnNext"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfConfirmPassword"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:layout_marginBottom="16dp"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_padlock"
                 android:layout_below="@+id/tfPassword"
-                android:layout_marginBottom="6dp"
-                android:layout_height="60dp"
-                android:text="Next" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:id="@+id/llSignUp"
-                android:layout_below="@+id/btnNext"
+                android:layout_below="@+id/tfConfirmPassword"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_width="match_parent"
+                android:weightSum="3"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_gravity="center"
-                    android:text="Already have an account? "
-                    android:textSize="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tvLogin"
-                    android:clickable="true"
-                    android:textSize="16sp"
-                    android:text="Login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:text="Cancel"
+                    android:layout_weight="1"
+                    android:layout_marginRight="8dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorGreyText"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:textSize="20sp" />
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:text="Update" />
             </LinearLayout>
 
 
@@ -137,3 +138,4 @@
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

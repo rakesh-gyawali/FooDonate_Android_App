@@ -64,8 +64,8 @@ SECRET='REPLACE_WITH_ANY_CHARACTERS'
 ```
 4. Enter 'npm start' to run the server.
 5. Open the Food Donate Charity folder with Android Studio.
-6. Press shift key 2 times quickly to open file search and type URL to open URL file.
-7. In URL file change the value of "BASE_URL" string variable to your IP Address.
+6. Press shift key 2 times quickly to open file search and type URL to open URL.java file.
+7. In URL.java file change the value of "BASE_URL" string variable to your IP Address to run on emulator.
 8. Run the app and click on Sign Up and create the account.
 9. Open the Food Donate User folder with Android Studio and repeat 5-8. Now, you can use the app.
 
